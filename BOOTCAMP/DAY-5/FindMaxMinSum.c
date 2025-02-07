@@ -1,58 +1,38 @@
 #include <stdio.h>
 #include <limits.h>
-int MaxSubarrSum(int arr[], int n, int k, int findmax)
+
+void findMaxMinSum(int arr[], int n, int k)
 {
-    int sum = 0;
-    for (int i = 0; i < k; i++)
+    if (k > n)
     {
-        sum += arr[i];
+        printf("Invalid input: K should be less than or equal to array size.\n");
+        return;
     }
-    int result = sum;
+    int maxsum = INT_MIN, minsum = INT_MAX;
+    int currentsum = 0;
+    for (int i = 0; i < k; i++)
+        currentsum += arr[i];
+    maxsum = minsum = currentsum;
+
+    // sliding window technique
 
     for (int i = k; i < n; i++)
     {
-        sum += arr[i] - arr[i - k];
+        currentsum += arr[i] - arr[i - k]; // slides the window
+        if (currentsum > maxsum)
+            maxsum = currentsum;
 
-        if (findmax)
-        {
-            if (sum > result)
-            {
-                result = sum;
-            }
-        }
-        else
-        {
-            if (sum < result)
-            {
-                result = sum;
-            }
-        }
+        if (currentsum < minsum)
+            minsum = currentsum;
     }
-    return result;
+    printf("Maximum sum of subarray of size %d: %d\n", k, maxsum);
+    printf("Minimum sum of subarray of size %d: %d\n", k, minsum);
 }
-
-//     int max_sum = INT_MIN, current_sum = 0;
-//     for (int i = 0; i < n; i++)
-//     {
-//         current_sum += arr[i];
-//         if (current_sum > max_sum)
-//             max_sum = current_sum;
-//         if (current_sum < 0)
-//             current_sum = 0;
-//     }
-//     return max_sum;
-// }
 int main()
 {
-
-    int arr[] = {2, 1, 5, 1, 3, 2};
+    int arr[] = {1, 2, 3, 4, 5};
     int n = sizeof(arr) / sizeof(arr[0]);
     int k = 3;
-    int max_sum = MaxSubarrSum(arr, n, k, 1);
-    printf("Maximum Subarray sum: %d\n", k, max_sum);
-
-    int min_sum = MaxSubarrSum(arr, n, k, 0);
-    printf("Minimum Subarray sum: %d\n", k, min_sum);
-
+    findMaxMinSum(arr, n, k);
     return 0;
 }

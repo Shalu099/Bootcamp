@@ -16,7 +16,7 @@ int findMaxConsecutiveOnes(int arr[],int n){
     return maxcount;
 }
 int main(){
-    int a[]={1,1,0,0,1,1,0,1,0,1};
+    int a[]={1,1,1,0,0,1,1,0,1,0,1};
     int n=sizeof(a)/sizeof(a[0]);
     int maxones=findMaxConsecutiveOnes(a,n);
     printf("Maximum Consecutive is: %d\n",maxones);
