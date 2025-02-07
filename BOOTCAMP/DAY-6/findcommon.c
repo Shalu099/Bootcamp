@@ -33,7 +33,7 @@ int main()
 {
     int a[] = {1, 5, 2, 5, 6, 7, 8};
     int b[] = {1, 4, 3, 2};
-    int c[] = {0, 0, 9, 8};
+    int c[] = {1, 0, 9, 8};
 
     int n1 = sizeof(a) / sizeof(a[0]);
     int n2 = sizeof(b) / sizeof(b[0]);
